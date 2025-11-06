@@ -35,27 +35,34 @@
   <link rel="icon" href="./static/images/favicon.svg">
   
   <style>
-    /* 图片交互动画样式 */
-    .image-hover {
-      transition: all 0.3s ease;
-      cursor: pointer;
+    /* 全局样式优化 */
+    * {
+      box-sizing: border-box;
     }
     
-    .image-hover:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
+    body {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      min-height: 100vh;
     }
     
-    /* 页头样式 */
+    /* 页头样式 - 精致美化 */
     .site-header {
-      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-      color: white;
-      padding: 1.5rem 0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 1.2rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
       position: sticky;
       top: 0;
       z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .site-header.scrolled {
+      padding: 1rem 0;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+      background: #2c3e50;
     }
     
     .site-header .container {
@@ -66,83 +73,378 @@
     
     .site-header h1 {
       color: white;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.75rem;
+      font-weight: 700;
       margin: 0;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .site-header nav {
+      display: flex;
+      gap: 0.5rem;
     }
     
     .site-header nav a {
-      color: white;
-      margin-left: 2rem;
+      color: #ecf0f1;
       text-decoration: none;
-      transition: opacity 0.3s ease;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .site-header nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .site-header nav a:hover::before {
+      left: 0;
     }
     
     .site-header nav a:hover {
-      opacity: 0.8;
+      color: #3498db;
+      transform: translateY(-2px);
     }
     
-    /* 页尾样式 */
+    /* Hero Section 美化 */
+    .hero {
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(52,152,219,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 1;
+    }
+    
+    .hero-body {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .publication-title {
+      color: #2c3e50;
+      font-size: 3rem;
+      font-weight: 700;
+      animation: fadeInUp 0.8s ease-out;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Section 样式优化 */
+    .section {
+      position: relative;
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
+      border-radius: 2px;
+    }
+    
+    .section-title i {
+      margin-right: 0.75rem;
+      color: #3498db;
+    }
+    
+    /* Abstract Section 卡片样式 */
+    #abstract {
+      padding: 5rem 0 !important;
+    }
+    
+    #abstract .content {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    #abstract .content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    }
+    
+    #abstract .content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #2c3e50;
+      text-align: justify;
+    }
+    
+    /* 图片交互动画样式 - 增强版 */
+    .image-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      background: white;
+      padding: 8px;
+      opacity: 1;
+    }
+    
+    .image-hover img {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .image-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Example Section 容器 */
+    .example-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .example-container:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* PDF 容器美化 */
+    #pdf-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    #pdf-container canvas {
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    #pdf-container canvas:hover {
+      transform: scale(1.01);
+    }
+    
+    /* 页尾样式 - 精致美化 */
     .site-footer {
-      background-color: #2c3e50;
+      background: #2c3e50;
       color: #ecf0f1;
-      padding: 3rem 0 1.5rem;
-      margin-top: 4rem;
+      padding: 4rem 0 2rem;
+      margin-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .site-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     }
     
     .site-footer .footer-content {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 2rem;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .site-footer h3 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .site-footer p {
+      color: #bdc3c7;
+      line-height: 1.7;
+      max-width: 400px;
     }
     
     .site-footer .footer-links {
       display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 1rem;
     }
     
     .site-footer .footer-links a {
       color: #ecf0f1;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .site-footer .footer-links a::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
     }
     
     .site-footer .footer-links a:hover {
       color: #3498db;
+      padding-left: 1.8rem;
+    }
+    
+    .site-footer .footer-links a:hover::before {
+      opacity: 1;
+      left: 0.3rem;
     }
     
     .site-footer .footer-copyright {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 3rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: #95a5a6;
       font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
     }
     
+    /* 响应式设计优化 */
     @media (max-width: 768px) {
       .site-header .container {
         flex-direction: column;
         gap: 1rem;
       }
       
+      .site-header h1 {
+        font-size: 1.5rem;
+      }
+      
       .site-header nav {
-        display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 0.5rem;
       }
       
       .site-header nav a {
-        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .publication-title {
+        font-size: 2rem;
+      }
+      
+      #abstract .content {
+        padding: 2rem 1.5rem;
+      }
+      
+      #abstract .content p {
+        font-size: 1rem;
+      }
+      
+      .example-container {
+        padding: 1.5rem;
       }
       
       .site-footer .footer-content {
         flex-direction: column;
         text-align: center;
+        gap: 2rem;
       }
+      
+      .site-footer .footer-links {
+        align-items: center;
+      }
+      
+      .site-footer p {
+        max-width: 100%;
+      }
+    }
+    
+    /* 滚动条美化 */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
     }
   </style>
 
@@ -184,8 +486,8 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">
-          <i class="fas fa-file-alt" style="margin-right: 0.5rem; color: #34495e;"></i>
+        <h2 class="title is-3 section-title">
+          <i class="fas fa-file-alt"></i>
           Abstract
         </h2>
         <div class="content has-text-justified">
@@ -200,12 +502,12 @@
   </div>
 </section>
 
-<section class="section" id="architecture" style="background-color: #f8f9fa; padding: 3rem 0 0 0;">
+<section class="section" id="architecture" style="background-color: #f8f9fa; padding: 5rem 0;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3" style="margin-bottom: 2rem; color: #34495e;">
-          <i class="fas fa-project-diagram" style="margin-right: 0.5rem;"></i>
+        <h2 class="title is-3 section-title" style="color: #34495e;">
+          <i class="fas fa-project-diagram"></i>
           TritonCast's architecture and long-term forecasting performance
         </h2>
         <div class="content">
@@ -267,23 +569,29 @@
   </div>
 </section>
 
-<section class="section" id="examples" style="background-color: #ffffff; padding: 3rem 0 0 0;">
+<section class="section" id="examples" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3" style="margin-bottom: 2rem; color: #34495e;">
-          <i class="fas fa-cloud-sun" style="margin-right: 0.5rem;"></i>
+        <h2 class="title is-3 section-title" style="color: #34495e;">
+          <i class="fas fa-cloud-sun"></i>
           Example 1: Year-long Weather Forecasting
         </h2>
         <div class="content">
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/02_temperature_1000_animation.gif" alt="Temperature 1000 animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/02_temperature_1000_animation.gif" alt="Temperature 1000 animation" style="width: 100%; display: block;">
+            </div>
           </div>
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/03_v_component_of_wind_1000_animation.gif" alt="V component of wind 1000 animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/03_v_component_of_wind_1000_animation.gif" alt="V component of wind 1000 animation" style="width: 100%; display: block;">
+            </div>
           </div>
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/04_combined_animations.gif" alt="Combined animations" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/04_combined_animations.gif" alt="Combined animations" style="width: 100%; display: block;">
+            </div>
           </div>
         </div>
       </div>
@@ -292,20 +600,24 @@
   </div>
 </section>
 
-<section class="section" style="background-color: #f8f9fa; padding: 3rem 0 0 0;">
+<section class="section" style="background-color: #f8f9fa; padding: 5rem 0;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3" style="margin-bottom: 2rem; color: #34495e;">
-          <i class="fas fa-globe-americas" style="margin-right: 0.5rem;"></i>
+        <h2 class="title is-3 section-title" style="color: #34495e;">
+          <i class="fas fa-globe-americas"></i>
           Example 2: Multi-year Climate Simulation
         </h2>
         <div class="content">
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/05_T2M_simulation_animation (1).gif" alt="T2M simulation animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/05_T2M_simulation_animation (1).gif" alt="T2M simulation animation" style="width: 100%; display: block;">
+            </div>
           </div>
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/06_global_mean_evolution.gif" alt="Global mean evolution" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/06_global_mean_evolution.gif" alt="Global mean evolution" style="width: 100%; display: block;">
+            </div>
           </div>
         </div>
       </div>
@@ -314,23 +626,29 @@
   </div>
 </section>
 
-<section class="section" style="background-color: #ffffff; padding: 3rem 0 0 0;">
+<section class="section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3" style="margin-bottom: 2rem; color: #34495e;">
-          <i class="fas fa-water" style="margin-right: 0.5rem;"></i>
+        <h2 class="title is-3 section-title" style="color: #34495e;">
+          <i class="fas fa-water"></i>
           Example 3: Ocean Current Forecasting
         </h2>
         <div class="content">
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/07_agulhas_current_speed_animation.gif" alt="Agulhas current speed animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/07_agulhas_current_speed_animation.gif" alt="Agulhas current speed animation" style="width: 100%; display: block;">
+            </div>
           </div>
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/08_gulf_stream_speed_animation.gif" alt="Gulf stream speed animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/08_gulf_stream_speed_animation.gif" alt="Gulf stream speed animation" style="width: 100%; display: block;">
+            </div>
           </div>
           <div style="margin-bottom: 3rem; display: flex; justify-content: center;">
-            <img src="./static/tritoncast/09_kuroshio_current_speed_animation.gif" alt="Kuroshio current speed animation" class="image-hover" style="max-width: 1200px; width: 100%; display: block;">
+            <div class="image-hover" style="max-width: 1200px; width: 100%;">
+              <img src="./static/tritoncast/09_kuroshio_current_speed_animation.gif" alt="Kuroshio current speed animation" style="width: 100%; display: block;">
+            </div>
           </div>
         </div>
       </div>
@@ -374,6 +692,47 @@
           block: 'start'
         });
       }
+    });
+  });
+  
+  // Header滚动效果
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.site-header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+  
+  // 图片懒加载动画
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px 50px 0px'
+  };
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '0';
+        entry.target.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, 50);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // 观察所有图片容器
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.image-hover').forEach(container => {
+      // 初始状态设置
+      container.style.opacity = '1';
+      container.style.transform = 'translateY(0)';
+      observer.observe(container);
     });
   });
 </script>
