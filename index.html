@@ -180,6 +180,41 @@
       background-clip: text;
     }
     
+    /* 作者和机构样式 */
+    .authors-section {
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    .authors-section .authors {
+      text-align: center;
+    }
+    
+    .authors-section .authors p {
+      margin: 0;
+    }
+    
+    .authors-section .authors sup {
+      font-size: 0.75em;
+      vertical-align: super;
+      color: #3498db;
+      font-weight: 600;
+    }
+    
+    .authors-section .affiliations {
+      text-align: center;
+    }
+    
+    .authors-section .affiliations p {
+      margin: 0;
+    }
+    
+    .authors-section .affiliations sup {
+      font-size: 0.85em;
+      vertical-align: super;
+      color: #7f8c8d;
+      font-weight: 600;
+    }
+    
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -458,6 +493,24 @@
         font-size: 2rem;
       }
       
+      .authors-section {
+        margin-top: 1.5rem !important;
+      }
+      
+      .authors-section .authors {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+      }
+      
+      .authors-section .affiliations {
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
+      }
+      
+      .authors-section .affiliations p {
+        text-align: center !important;
+      }
+      
       #abstract .content {
         padding: 2rem 1.5rem;
       }
@@ -641,6 +694,18 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title">Advanced Long-term Earth System Forecasting</h1>
+          <div class="authors-section" style="margin-top: 2.5rem;">
+            <div class="authors" style="font-size: 1.1rem; line-height: 1.8; color: #34495e; margin-bottom: 1.5rem;">
+              <p style="margin-bottom: 0.5rem;">
+                Hao Wu<sup>1,∗,†</sup>, Yuan Gao<sup>1,∗,†</sup>, Kun Wang<sup>2,∗</sup>, Ruijian Gou<sup>3,∗</sup>, Chuhan Wu<sup>4,∗</sup>, Huahui Yi<sup>5,∗</sup>, Fan Xu<sup>7</sup>, Penghao Zhao<sup>4</sup>, Hao Jia<sup>4</sup>, Xinliang Liu<sup>3</sup>, Juncai He<sup>1</sup>, Shuhao Cao<sup>6</sup>, Huanshuo Dong<sup>7</sup>, Yanfei Xiang<sup>1</sup>, Fan Zhang<sup>8</sup>, Haixin Wang<sup>9</sup>, Xingjian Shi<sup>10</sup>, Qiufeng Wang<sup>11</sup>, Shuaipeng Li<sup>4</sup>, Ruobing Xie<sup>4</sup>, Feng Tao<sup>12</sup>, Qi Song<sup>7</sup>, Yuntian Chen<sup>15</sup>, Xian Wu<sup>4</sup>, Yuxuan Liang<sup>13</sup>, Qingsong Wen<sup>14</sup>, Deliang Chen<sup>1</sup>, Xiaomeng Huang<sup>1,‡</sup>
+              </p>
+            </div>
+            <div class="affiliations" style="font-size: 0.95rem; line-height: 1.6; color: #7f8c8d; max-width: 900px; margin: 0 auto;">
+              <p style="margin: 0; text-align: left;">
+                <sup>1</sup> Tsinghua University, <sup>2</sup> Nanyang Technological University, <sup>3</sup> Ocean University of China, <sup>4</sup> Tencent, <sup>5</sup> West China Biomedical Big Data Center, <sup>6</sup> University of Missouri-Kansas City, <sup>7</sup> University of Science and Technology of China, <sup>8</sup> The Chinese University of Hong Kong, <sup>9</sup> University of California, Los Angeles, <sup>10</sup> Boson Al, <sup>11</sup> Southeast University, <sup>12</sup> Cornell University, <sup>13</sup> Hong Kong University of Science and Technology (Guangzhou), <sup>14</sup> Squirrel Ai Learning, <sup>15</sup> Eastern Institute of Technology, Ningbo
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
