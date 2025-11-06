@@ -294,7 +294,6 @@
       background: #2c3e50;
       color: #ecf0f1;
       padding: 4rem 0 2rem;
-      margin-top: 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -314,9 +313,20 @@
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 3rem;
+      gap: 4rem;
       position: relative;
       z-index: 1;
+    }
+    
+    .site-footer .footer-content > div:first-child {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .site-footer .footer-content > div:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
     
     .site-footer h3 {
@@ -329,45 +339,58 @@
     .site-footer p {
       color: #bdc3c7;
       line-height: 1.7;
-      max-width: 400px;
+      max-width: 500px;
     }
     
-    .site-footer .footer-links {
+    .site-footer .footer-links-title {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .site-footer .footer-links-wrapper {
       display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      flex-direction: row;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      align-items: center;
     }
     
-    .site-footer .footer-links a {
+    .site-footer .footer-links-wrapper a {
       color: #ecf0f1;
       text-decoration: none;
       transition: all 0.3s ease;
-      padding: 0.5rem 0;
+      padding: 0.6rem 0;
       position: relative;
-      padding-left: 1.5rem;
+      font-weight: 500;
+      font-size: 1rem;
     }
     
-    .site-footer .footer-links a::before {
-      content: '→';
+    .site-footer .footer-links-wrapper a::after {
+      content: '';
       position: absolute;
+      bottom: 0;
       left: 0;
-      opacity: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3498db 0%, #2980b9 100%);
       transition: all 0.3s ease;
+      border-radius: 1px;
     }
     
-    .site-footer .footer-links a:hover {
+    .site-footer .footer-links-wrapper a:hover {
       color: #3498db;
-      padding-left: 1.8rem;
     }
     
-    .site-footer .footer-links a:hover::before {
-      opacity: 1;
-      left: 0.3rem;
+    .site-footer .footer-links-wrapper a:hover::after {
+      width: 100%;
     }
     
     .site-footer .footer-copyright {
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 1rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       color: #95a5a6;
@@ -416,12 +439,21 @@
       
       .site-footer .footer-content {
         flex-direction: column;
-        text-align: center;
-        gap: 2rem;
+        gap: 3rem;
       }
       
-      .site-footer .footer-links {
+      .site-footer .footer-content > div:first-child {
+        text-align: center;
+      }
+      
+      .site-footer .footer-content > div:last-child {
         align-items: center;
+        text-align: center;
+      }
+      
+      .site-footer .footer-links-wrapper {
+        justify-content: center;
+        gap: 2rem;
       }
       
       .site-footer p {
@@ -508,7 +540,7 @@
       <div class="column is-full-width">
         <h2 class="title is-3 section-title" style="color: #34495e;">
           <i class="fas fa-project-diagram"></i>
-          TritonCast's architecture and long-term forecasting performance
+          Architecture & Long-term Forecasting Performance
         </h2>
         <div class="content">
           <div id="pdf-container" style="overflow: visible; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
@@ -663,15 +695,18 @@
   <div class="container is-max-desktop">
     <div class="footer-content">
       <div>
-        <h3 style="color: #ecf0f1; margin-bottom: 1rem; font-size: 1.2rem;">TritonCast</h3>
-        <p style="color: #bdc3c7; max-width: 400px;">
+        <h3>TritonCast</h3>
+        <p>
           Advanced Long-term Earth System Forecasting using AI-driven simulations for weather and climate prediction.
         </p>
       </div>
-      <div class="footer-links">
-        <a href="#abstract">Abstract</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#examples">Examples</a>
+      <div>
+        <h3 class="footer-content">Quick Links</h3>
+        <div class="footer-links-wrapper">
+          <a href="#abstract">Abstract</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#examples">Examples</a>
+        </div>
       </div>
     </div>
     <div class="footer-copyright">
